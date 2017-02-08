@@ -1,0 +1,4 @@
+# << Impex 9 - r3_test_000_maklerimport12.impex - should NOT be loaded
+INSERT_UPDATE Customer;uid[unique=true];customerID;name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password;
+;john.smith9@mailinator.com;cfa50952-280e-43f3-9aa4-cad9ca7ee3f7;John Smith;;en;USD;customergroup;zaq12wsx; 
+# << Impex 9 - r3_test_000_maklerimport12.impex 

@@ -1,0 +1,4 @@
+# << Impex 6 - r2_test_000_maklerimport12.impex - should be loaded as patch "number" test matches patch folder test
+INSERT_UPDATE Customer;uid[unique=true];customerID;name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password;
+;john.smith6@mailinator.com;cfa50952-280e-43f3-9aa4-cad9ca7ee3f6;John Smith;;en;USD;customergroup;zaq12wsx;
+# >> End  impex 6 - r2_test_000_maklerimport12.impex

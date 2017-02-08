@@ -1,29 +1,25 @@
-/*
- * [y] hybris Platform
- *
- * Copyright (c) 2000-2013 hybris AG
- * All rights reserved.
- *
- * This software is the confidential and proprietary information of hybris
- * ("Confidential Information"). You shall not disclose such Confidential
- * Information and shall use it only in accordance with the terms of the
- * license agreement you entered into with hybris.
- * 
- *  
- */
+
 package eu.pawelniewiadomski.java.hybris.patches.constants;
 
-/**
- * Global class for all Hybrispatches constants. You can add global constants for your extension into this class.
- */
-public final class HybrispatchesConstants extends GeneratedHybrispatchesConstants
+
+public final class HybrisPatchesConstants extends GeneratedHybrispatchesConstants
 {
 	public static final String EXTENSIONNAME = "hybrispatches";
+	public static final String PATCHES_PATH = "/" + EXTENSIONNAME + "/import/patches";
 
-	private HybrispatchesConstants()
+	public static final String CFG_SOLRCONFIG = "hybrispatches.solr.configuration";
+	public static final String CFG_CATALOGNAME = "hybrispatches.catalog.name";
+	public static final String CFG_INDEXSOLR = "hybrispatches.init.indexing.solr";
+	public static final String CFG_SYNCCATALOGS = "hybrispatches.init.synchronize.catalogs";
+
+	public static final String CFG_MAIL_ADDRESSFROM = "hybrispatches.mail.address.from";
+	public static final String CFG_MAIL_ADDRESSTO = "hybrispatches.mail.address.to";
+	public static final String CFG_MAIL_USERNAME = "hybrispatches.mail.username";
+	public static final String CFG_MAIL_SUBJECT = "hybrispatches.mail.subject";
+
+	private HybrisPatchesConstants()
 	{
 		//empty to avoid instantiating this constant class
 	}
 
-	// implement here constants used by this extension
 }

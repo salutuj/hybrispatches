@@ -1,84 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- [y] hybris Platform
-
- Copyright (c) 2000-2013 hybris AG
- All rights reserved.
-
- This software is the confidential and proprietary information of hybris
- ("Confidential Information"). You shall not disclose such Confidential
- Information and shall use it only in accordance with the terms of the
- license agreement you entered into with hybris.
--->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/aop
            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<!--
-	The hybris platform provides one single Spring application context for beans located at the jalo layer.
-	Each extension can add beans to this context by specifying them at this configuration file.
-	 
-	You can use and/or redefine beans defined at configuration files of other extensions as well as
-	adding new one.
-		
-	If you want to locate this file at a different location or want to use several files for better,
-	structuring, please use the '<yourextension>.application-context' property at your project.properties file.
-	There you can specify a comma separated list of files where first is tried to find a file per classpath and
-	then per file system.
-
-	
-	If you want to configure beans for your web module please have a look at
-	your web/webroot/WEB-INF/<extname>-web-spring.xml.
-	-->
-	
-	<!--  Example how to override a manager -->
-	<!--
-	<bean id="core.productManager"   class="eu.pawelniewiadomski.java.hybris.patches.jalo.HybrispatchesProductManager" 	init-method="init"	destroy-method="destroy" />
-	-->
-	
-	
- 	<!--  Example how to configure the class to use for jalo session creation -->
-	<!--
-	<bean id="jalosession"   class="de.hybris.platform.jalo.JaloSessionFactory">
-		<property name="targetClassName" value="eu.pawelniewiadomski.java.hybris.patches.jalo.HybrispatchesJaloSession"/>
+	<alias alias="impexInfoRenderer" name="defaultImpexInfoRenderer" />
+	<bean id="defaultImpexInfoRenderer" class="eu.pawelniewiadomski.java.hybris.patches.impex.ImpexInfoRenderer">
 	</bean>
-	-->
 
-	
-	<!--  Example how to override an item  -->
-	<!-- 
-	<bean id="de.hybris.platform.jalo.product.Product" class="eu.pawelniewiadomski.java.hybris.patches.jalo.HybrispatchesProduct" scope="prototype" />		
- 	-->
+	<alias alias="emailRenderer" name="defaultEmailRenderer" />
+	<bean id="defaultEmailRenderer" class="eu.pawelniewiadomski.java.hybris.patches.email.EmailRenderer">
+		<property name="impexInfoRenderer" ref="impexInfoRenderer"></property>
+	</bean>
+	<alias alias="emailContext" name="defaltEmailContext" />
+	<bean id="defaltEmailContext" class="eu.pawelniewiadomski.java.hybris.patches.email.EmailContext">
+		<property name="configurationService" ref="configurationService"></property>
+	</bean>
 
-	<!--  
-	 Example how to register and use an AOP aspect 
-     Also see http://static.springframework.org/spring/docs/2.5.x/reference/aop.html	
-     -->
-	
-	<!-- 
-	<bean id="hybrispatchesProfBean" class="eu.pawelniewiadomski.java.hybris.patches.aop.HybrispatchesProfilingAspect"/>
-	<aop:config proxy-target-class="true">
-  		<aop:aspect id="hybrispatchesProfAspect" ref="hybrispatchesProfBean" >
-    	  <aop:pointcut id="profiledMethods" 
-	      	expression="execution(* getModificationTime(..))" />  	            
-	   		<aop:around pointcut-ref="profiledMethods" method="profile" />
-  		</aop:aspect>
-	</aop:config>
-	 -->
+	<bean id="patchesImportedEventListener" parent="abstractEventListener" class="eu.pawelniewiadomski.java.hybris.patches.event.PatchesImportedEventListener">
+		<property name="emailService" ref="emailService"></property>
+		<property name="emailRenderer" ref="emailRenderer"></property>
+		<property name="emailContext" ref="emailContext"></property>
+	</bean>
 
-	
-	<!-- some other examples of a pointcut that matches everything:
+	<alias alias="patchInfoDao" name="defaultPatchInfoDao" />
+	<bean id="defaultPatchInfoDao" parent="abstractItemDao"
+		class="eu.pawelniewiadomski.java.hybris.patches.servicelayer.dao.impl.PatchInfoDaoImpl">
+	</bean>
 
-    	  <aop:pointcut id="profiledMethods" 
-	      	expression="bean(de.hybris.platform.jalo.user.Customer) &amp;&amp; 
-	      	            !execution(* getPK(..))" />  	            
-	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
-	  -->
+	<alias alias="patchInfoService" name="defaultPatchInfoService" />
+	<bean id="defaultPatchInfoService" parent="abstractBusinessService"
+		class="eu.pawelniewiadomski.java.hybris.patches.service.impl.DefaultPatchInfoService">
+		<property name="patchInfoDao" ref="patchInfoDao" />
+	</bean>
+
+	<alias alias="patchImpexScanner" name="defaultPatchImpexScanner" />
+	<bean id="defaultPatchImpexScanner" class="eu.pawelniewiadomski.java.hybris.patches.impex.PatchImpexScanner">
+		<property name="patchInfoService" ref="patchInfoService"></property>
+	</bean>
+
+	<bean id="patchSystemSetup" class="eu.pawelniewiadomski.java.hybris.patches.systemsetup.HybrisPatchesSystemSetup"
+		parent="abstractCoreSystemSetup">
+		<property name="configurationService" ref="configurationService"></property>
+		<property name="patchInfoService" ref="patchInfoService"></property>
+		<property name="patchImpexScanner" ref="patchImpexScanner"></property>
+		<property name="impexInfoRenderer" ref="impexInfoRenderer"></property>
+
+	</bean>
 	
 			
 			

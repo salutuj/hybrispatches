@@ -1,0 +1,4 @@
+# << Impex 5 - r2_p_2.1_000_maklerimport12.impex - should be loaded 
+INSERT_UPDATE Customer;uid[unique=true];customerID;name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password;
+;john.smith5@mailinator.com;cfa50952-280e-43f3-9aa4-cad9ca7ee3f5;John Smith;;en;USD;customergroup;zaq12wsx;
+# >> End  impex 5 - r2_p_2.1_000_maklerimport12.impex

@@ -1,0 +1,4 @@
+# << Impex 1 - r1_p_1.0_099_maklerim.impex - should be loaded  
+INSERT_UPDATE Customer;uid[unique=true];customerID;name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password;
+;john.smith1@mailinator.com;cfa50952-280e-43f3-9aa1-cad9ca7ee3ff;John Smith;;en;USD;customergroup;zaq12wsx;
+# >> Impex 1 - r1_p_1.0_099_maklerim.impex
