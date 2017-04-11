@@ -1,2 +1,8 @@
 eclipsebin/
 gensrc/
+classes/
+resources/beans.xsd
+build.xml
+extensioninfo.xsd
+resources/items.xsd
+platformhome.properties

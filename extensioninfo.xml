@@ -19,7 +19,7 @@
       <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->         
       <requires-extension name="commerceservices"/> 
 	  <requires-extension name="acceleratorservices"/> 
-      <coremodule generated="true" manager="" packageroot="eu.pawelniewiadomski.java.hybris.patches"/>
+      <coremodule generated="true" manager="eu.pawelniewiadomski.java.hybris.patches.jalo.HybrisPatchesManager" packageroot="eu.pawelniewiadomski.java.hybris.patches"/>
 
   
   

@@ -2,7 +2,7 @@
 package eu.pawelniewiadomski.java.hybris.patches.constants;
 
 
-public final class HybrisPatchesConstants extends GeneratedHybrispatchesConstants
+public final class HybrisPatchesConstants extends GeneratedHybrisPatchesConstants
 {
 	public static final String EXTENSIONNAME = "hybrispatches";
 	public static final String PATCHES_PATH = "/" + EXTENSIONNAME + "/import/patches";
